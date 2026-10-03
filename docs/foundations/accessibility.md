@@ -11,7 +11,7 @@ meet WCAG 2.1 AA contrast minimums:
 
 - **4.5:1** for normal body text (`--text-primary`, `--text-secondary` on
   `--bg-base`/`--bg-surface-*`).
-- **3:1** for large text (≥ 1.25rem / 18.66px bold-equivalent, e.g.
+- **3:1** for large text (≥ 18pt/24px regular, or ≥ 14pt/18.66px bold, e.g.
   `--type-h1`/`--type-display`) and for meaningful non-text UI like icons,
   focus rings, and status indicators against their adjacent background.
 
