@@ -79,6 +79,9 @@ export function useTheme(): UseThemeReturn {
     if (preference !== 'system' || !window.matchMedia) return;
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const handle = () => setSystemTheme(resolveSystemTheme());
+    // Re-sync immediately: the OS preference may have changed while we
+    // weren't listening (i.e. while `preference` was an explicit theme).
+    handle();
     if (mq.addEventListener) {
       mq.addEventListener('change', handle);
       return () => mq.removeEventListener('change', handle);

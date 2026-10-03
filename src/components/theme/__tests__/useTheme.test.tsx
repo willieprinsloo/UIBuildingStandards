@@ -112,4 +112,31 @@ describe('useTheme', () => {
     expect(document.documentElement.getAttribute('data-theme')).toBe('warehouse');
     expect(document.documentElement.getAttribute('data-theme-mode')).toBe('light');
   });
+
+  it('re-syncs systemTheme when switching back to system after the OS changed while on an explicit preference', () => {
+    const mq = mockMatchMediaWithChangeCapture(true); // OS starts dark
+    localStorage.setItem('ui-theme', 'warehouse'); // explicit preference, not 'system'
+    const { result } = renderHook(() => useTheme());
+
+    expect(result.current.preference).toBe('warehouse');
+    expect(result.current.resolvedTheme).toBe('warehouse');
+
+    // OS flips to light while we're on an explicit preference (no listener
+    // attached yet) — resolvedTheme must NOT change.
+    act(() => {
+      mq.simulateChange(false);
+    });
+    expect(result.current.resolvedTheme).toBe('warehouse');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('warehouse');
+
+    // Now switch to 'system' — it should re-read the *current* OS
+    // preference (light) immediately, not serve a stale 'dark' reading.
+    act(() => {
+      result.current.setPreference('system');
+    });
+
+    expect(result.current.resolvedTheme).toBe('warehouse');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('warehouse');
+    expect(document.documentElement.getAttribute('data-theme-mode')).toBe('light');
+  });
 });

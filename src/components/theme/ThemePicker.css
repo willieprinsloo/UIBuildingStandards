@@ -76,7 +76,8 @@
   height: 8px;
   border-radius: var(--radius-full);
 }
-.ui-theme-picker__swatch--system {
-  background: linear-gradient(135deg, #0C0D11 0 50%, #F6F3EE 50% 100%);
-}
+/* .ui-theme-picker__swatch--system: the gradient itself is set inline in
+   ThemePicker.tsx, composed from the registry's canonical dark/light swatch
+   colors (getTheme('precision')/.getTheme('warehouse')) so it keeps tracking
+   those themes rather than duplicating hex values in CSS. */
 .ui-theme-picker__label { white-space: nowrap; }
