@@ -170,11 +170,11 @@ Each component also has:
 Reuse workflow for an agent: copy the token files once into the target project, then
 copy the needed component `.tsx` + `.css` files. No build config required.
 
-### Component catalog (~24)
+### Component catalog (~30 core; see the coverage map below for the full admin picture)
 - **primitives**: Button, Input, Select, Textarea, Checkbox, Radio, Switch, FormField, Badge/StatusBadge
 - **data**: DataTable (**standard: column sorting + search + paging, all server-driven**; plus filter / bulk-actions), Pagination, StatCard, EmptyState, Skeleton
-- **overlay**: Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette
-- **layout**: AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card
+- **overlay**: Modal (+ ConfirmDialog usage), Drawer, Toast, DropdownMenu, Tooltip, Popover, Combobox, DatePicker, CommandPalette
+- **layout**: AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card, DescriptionList (record fields)
 - **auth**: LoginScreen, ChangePassword, ForgotPassword, ResetPassword
 - **theme**: the ERP theme engine ported — `registry.ts`, `useTheme`, `ThemeToggle`, `ThemePicker`, pre-paint script snippet
 
@@ -376,6 +376,77 @@ send email via **MetaMail**, the MetaLogix transactional email platform. The fro
 triggers a backend endpoint (never calling MetaMail directly with an API key); the
 backend sends through MetaMail. See `docs/references/metamail.md` and the API docs at
 https://metamail.metalogix.solutions/api-docs (or `/metaMailAgent`).
+
+### Admin-system coverage map (completeness checklist)
+
+So nothing an administration system typically needs is silently missed, this is the full
+map of admin capabilities to how the standard covers them. **In scope** = shipped or
+planned in a phase; **Pattern** = documented usage/composition (often of existing
+components), not a new component; **Opt-in** = available on request, not built by default.
+
+**Navigation & shell**
+- App shell (top nav + vertical sidebar + content) — ✅ Phase 3 (AppShell).
+- Vertical site menu with grouping — ✅ Phase 3 (see menu-grouping standard).
+- Account/user section (profile, settings, logout, org switcher) — ✅ Phase 3.
+- Breadcrumbs, Tabs, PageHeader, Card — ✅ Phase 3.
+- Global search / command palette — ✅ Phase 5 (CommandPalette).
+- Keyboard shortcuts + shortcuts help — Pattern (CommandPalette + a shortcuts overlay).
+
+**Forms & data entry**
+- Inputs: text, Textarea, Select, Checkbox, Radio, Switch, FormField, Badge — ✅ Phase 2.
+- Combobox/autocomplete, DatePicker — ✅ Phase 5.
+- Form layout + **validation** (required/error/inline help, field groups) — Pattern
+  (`forms-and-validation.md`, Phase 7) over Phase 2 primitives.
+- **Dirty-state / unsaved-changes guard** on forms — Pattern (Phase 7).
+- Record **create** (quick-create modal + full form page) and **edit** — Pattern
+  (record patterns, Phase 7; mirrors the ERP Record Creation Pattern).
+- File upload / attachments — **Opt-in** (not in the default catalog).
+- Multi-step **wizard / stepper** — **Opt-in** (common for import/onboarding; add on request).
+
+**Data display**
+- DataTable (server-driven sort/search/paging + filter + bulk actions + row selection) —
+  ✅ Phase 4.
+- Pagination, StatCard/KPI, EmptyState, Skeleton — ✅ Phase 4.
+- **Filter bar + saved views / column visibility + density toggle** — Pattern over DataTable
+  (`data-tables.md`, Phase 4/7).
+- **Record detail / read view** + **DescriptionList** (key-value record fields) — Pattern
+  (+ a small DescriptionList), Phase 3/7.
+- Tags/chips — covered by Badge + a chip usage Pattern.
+- **Tree view**, **calendar/scheduling**, **charts / dataviz** — **Opt-in** (for charts,
+  follow the `dataviz` guidance; not built into the core catalog).
+- Import/export (CSV) — **Opt-in** (pairs with the wizard).
+
+**Overlays, feedback & status**
+- Modal, Drawer, Toast, DropdownMenu — ✅ Phase 5.
+- **Confirmation dialog** (destructive confirm) — Pattern (a Modal usage), Phase 5.
+- **Tooltip** and **Popover** — ✅ added to Phase 5 overlay catalog.
+- Inline **Alert / Banner** (page + section level) and empty/loading states — Pattern
+  (`feedback.md`, Phase 7) + Skeleton.
+- **Progress / Spinner** (determinate + indeterminate) — Pattern over motion tokens, Phase 5.
+- Status system (success/warning/error/info + holiday) via StatusBadge + status tokens — ✅.
+- Notifications center (in-app notifications panel) — **Opt-in** (Drawer/Popover + list).
+- **Undo** affordance on toasts for reversible actions — Pattern.
+
+**Auth, account & access**
+- LoginScreen (split-screen), ForgotPassword, ResetPassword, ChangePassword — ✅ Phase 6.
+- Email verification / sign-up — Pattern (reuses the auth shell + MetaMail).
+- 2FA/MFA entry, session-timeout re-auth — **Opt-in** (auth-shell variants on request).
+- **Permissions / RBAC in the UI** — **Pattern (cross-cutting, Phase 7):** how to
+  hide vs. disable actions by permission, show "no access" (403) states, and gate nav items.
+
+**System & cross-cutting**
+- Day/night theming + theme picker — ✅ Phase 1.
+- Accessibility (WCAG AA, focus, keyboard, reduced-motion) — ✅ hard requirement, all phases.
+- **Error pages** (403 / 404 / 500) + React **error boundary** — Pattern/components, Phase 7.
+- Responsive / mobile admin (shell collapse, stacking) — ✅ built into the shell.
+- Localization & formatting (dates, numbers, currency; tabular figures via `--font-mono`) —
+  Pattern (formatting conventions, Phase 7).
+- Print / document view — the "centered narrow document" width archetype (Phase 3).
+- Onboarding / guidance — via EmptyState guidance + Tooltips.
+
+Items marked **Opt-in** are deliberately out of the default build (YAGNI) but are recognised
+admin needs — ask for any of them and they get a phase/plan. If a project needs an Opt-in
+item, that's a signal to add it to the standard rather than improvise a one-off.
 
 ## 6. The Skill
 
