@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   Combobox,
@@ -83,6 +83,16 @@ describe('DropdownMenu', () => {
     await userEvent.click(screen.getByRole('menuitem', { name: 'Edit' }));
     expect(onSelect).toHaveBeenCalled();
   });
+
+  it('closes when focus leaves the menu (keyboard Tab-out)', async () => {
+    const { container } = render(
+      <DropdownMenu trigger="Actions" items={[{ id: 'edit', label: 'Edit' }]} />,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+    fireEvent.blur(container.querySelector('.ui-dropdown')!, { relatedTarget: document.body });
+    expect(screen.queryByRole('menu')).toBeNull();
+  });
 });
 
 describe('Combobox', () => {
@@ -104,6 +114,23 @@ describe('Combobox', () => {
     const option = screen.getByRole('option', { name: 'Banana' });
     await userEvent.click(option);
     expect(onChange).toHaveBeenCalledWith('b');
+  });
+
+  it('shows the selected label (not a blank field) when focused', async () => {
+    render(
+      <Combobox
+        aria-label="Fruit"
+        value="b"
+        options={[
+          { value: 'a', label: 'Apple' },
+          { value: 'b', label: 'Banana' },
+        ]}
+        onChange={() => {}}
+      />,
+    );
+    const input = screen.getByRole('combobox', { name: 'Fruit' }) as HTMLInputElement;
+    await userEvent.click(input);
+    expect(input.value).toBe('Banana');
   });
 });
 

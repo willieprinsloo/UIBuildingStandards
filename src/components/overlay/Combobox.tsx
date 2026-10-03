@@ -38,15 +38,18 @@ export function Combobox({
   const selected = options.find((o) => o.value === value) ?? null;
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
+  // `dirty` = the user has typed since opening. Until then we show the selected
+  // label (not a blank field) and the full option list.
+  const [dirty, setDirty] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const listId = useId();
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const base = q ? options.filter((o) => o.label.toLowerCase().includes(q)) : options;
+    const base = dirty && q ? options.filter((o) => o.label.toLowerCase().includes(q)) : options;
     return base;
-  }, [options, query]);
+  }, [options, query, dirty]);
 
   useEffect(() => {
     if (!open) return;
@@ -65,6 +68,7 @@ export function Combobox({
     if (opt.disabled) return;
     onChange(opt.value);
     setQuery('');
+    setDirty(false);
     setOpen(false);
   }
 
@@ -84,10 +88,11 @@ export function Combobox({
     } else if (e.key === 'Escape') {
       setOpen(false);
       setQuery('');
+      setDirty(false);
     }
   }
 
-  const displayValue = open ? query : (selected?.label ?? '');
+  const displayValue = open ? (dirty ? query : (selected?.label ?? '')) : (selected?.label ?? '');
 
   return (
     <div className="ui-combobox" ref={rootRef}>
@@ -104,9 +109,13 @@ export function Combobox({
         value={displayValue}
         onChange={(e) => {
           setQuery(e.target.value);
+          setDirty(true);
           setOpen(true);
         }}
-        onFocus={() => setOpen(true)}
+        onFocus={() => {
+          setOpen(true);
+          setDirty(false);
+        }}
         onKeyDown={onKeyDown}
       />
       {open && (

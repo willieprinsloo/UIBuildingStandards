@@ -3,6 +3,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useRef,
   useState,
   type ReactNode,
@@ -41,8 +42,14 @@ export function useToast(): ToastContextValue {
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<ToastRecord[]>([]);
   const nextId = useRef(1);
+  const timers = useRef<Map<number, ReturnType<typeof setTimeout>>>(new Map());
 
   const dismiss = useCallback((id: number) => {
+    const timer = timers.current.get(id);
+    if (timer) {
+      clearTimeout(timer);
+      timers.current.delete(id);
+    }
     setToasts((list) => list.filter((t) => t.id !== id));
   }, []);
 
@@ -52,12 +59,21 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       setToasts((list) => [...list, { ...opts, id }]);
       const duration = opts.duration ?? 5000;
       if (duration > 0) {
-        setTimeout(() => dismiss(id), duration);
+        timers.current.set(id, setTimeout(() => dismiss(id), duration));
       }
       return id;
     },
     [dismiss],
   );
+
+  // Clear any pending timers on unmount (no state updates after unmount).
+  useEffect(() => {
+    const map = timers.current;
+    return () => {
+      map.forEach((t) => clearTimeout(t));
+      map.clear();
+    };
+  }, []);
 
   return (
     <ToastContext.Provider value={{ toast, dismiss }}>

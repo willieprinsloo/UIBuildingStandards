@@ -107,7 +107,14 @@ export function DropdownMenu({ trigger, items, align = 'start', 'aria-label': ar
   }
 
   return (
-    <div className="ui-dropdown" ref={rootRef}>
+    <div
+      className="ui-dropdown"
+      ref={rootRef}
+      onBlur={(e) => {
+        // Close when focus leaves the menu entirely (keyboard Tab-out).
+        if (open && !e.currentTarget.contains(e.relatedTarget as Node | null)) close();
+      }}
+    >
       <button
         type="button"
         className="ui-dropdown__trigger"
