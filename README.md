@@ -94,12 +94,18 @@ Built in phases; each phase produces working, tested software.
 | Phase | Scope | Status |
 |-------|-------|--------|
 | 1 | Foundation — design tokens + theme engine (registry, `useTheme`, `ThemeToggle`, `ThemePicker`) + foundation docs | ✅ Complete |
-| 2 | Primitives — Button, Input, Select, Textarea, Checkbox, Radio, Switch, FormField, Badge | ✅ Complete |
-| 3 | Layout & shell — AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card | ✅ Complete |
-| 4 | Data — DataTable (server-driven sort/search/paging), Pagination, StatCard, EmptyState, Skeleton | ✅ Complete |
-| 5 | Overlay — Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette | ✅ Complete |
-| 6 | Auth — LoginScreen (split-screen), ChangePassword, ForgotPassword, ResetPassword | ✅ Complete |
-| 7 | Docs, gallery & `ui-standards` skill | ✅ Complete |
+| 2 | Primitives — Button, Input, Select, Textarea, Checkbox, Radio, Switch, FormField, Badge, FileUpload | ⏳ Planned |
+| 3 | Layout & shell — AppShell (sidebar + topnav + menu grouping + account menu), PageHeader, Tabs, Breadcrumbs, Card, DescriptionList, Stepper/Wizard | ⏳ Planned |
+| 4 | Data — DataTable (server-driven sort/search/paging), Pagination, StatCard, EmptyState, Skeleton | ⏳ Planned |
+| 5 | Overlay — Modal/ConfirmDialog, Drawer, Toast, DropdownMenu, Tooltip, Popover, Combobox, DatePicker, CommandPalette, NotificationsCenter | ⏳ Planned |
+| 6 | Auth — LoginScreen (split-screen), ChangePassword, ForgotPassword, ResetPassword | ⏳ Planned |
+| 7 | Docs, gallery & `ui-standards` skill | ⏳ Planned |
+| 8 | Dataviz — themed chart wrappers (line/bar/area/pie), Sparkline, dashboard guidance | ⏳ Planned |
+
+> **Actual repo status:** only **Phase 1** is built and merged. Phases 2–8 are specced and
+> planned, not yet implemented. See the **Admin-system coverage map** in the
+> [design spec](docs/superpowers/specs/2026-10-03-ui-standards-design.md) for the full list of
+> admin capabilities and how each is covered (in-scope / pattern / opt-in).
 
 Two standards worth calling out early:
 - **DataTable is server-driven** — column sorting, search, and paging are built in and

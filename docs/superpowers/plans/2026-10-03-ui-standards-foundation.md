@@ -1730,9 +1730,12 @@ This is the base every later phase builds on. Components in Phases 2–6 referen
 
 Each is its own `docs/superpowers/plans/` file, produced when we reach it, and each produces working, tested software on its own:
 
-- **Phase 2 — Primitives:** Button, Input, Textarea, Select, Checkbox, Radio, Switch, FormField, Badge/StatusBadge. Establishes the component+CSS+test pattern and the a11y conventions all later components reuse.
-- **Phase 3 — Layout & shell:** AppShell (sidebar + topnav, collapse), PageHeader (+ width archetypes), Tabs, Breadcrumbs, Card. Depends on Phase 2 + `ThemeToggle`/`ThemePicker`.
+- **Phase 2 — Primitives:** Button, Input, Textarea, Select, Checkbox, Radio, Switch, FormField, Badge/StatusBadge, **FileUpload** (drag-drop + progress + validation). Establishes the component+CSS+test pattern and the a11y conventions all later components reuse.
+- **Phase 3 — Layout & shell:** AppShell (sidebar + topnav, **menu grouping**, **account/user section**, collapse), PageHeader (+ width archetypes), Tabs, Breadcrumbs, Card, **DescriptionList**, **Stepper/Wizard**. Consumes the Administration-site-layout contract (§5 of the spec). Depends on Phase 2 + `ThemeToggle`/`ThemePicker`.
 - **Phase 4 — Data:** DataTable (server-driven sorting + search + paging, the controlled `DataTableQuery` contract), Pagination, StatCard, EmptyState, Skeleton.
-- **Phase 5 — Overlay:** Modal (focus trap), Drawer, Toast (+ provider), DropdownMenu, Combobox, DatePicker, CommandPalette.
-- **Phase 6 — Auth:** LoginScreen (standard 4/5 brand : 1/5 form split), ForgotPassword, ResetPassword (reuse the split shell), ChangePassword (in-app form).
-- **Phase 7 — Docs, gallery & skill:** per-component docs, pattern docs (page-shell, forms, data-tables, navigation, feedback, auth), self-contained `gallery/index.html` (both themes), `skills/ui-standards/SKILL.md`, and the top-level `README.md`.
+- **Phase 5 — Overlay:** Modal (focus trap) + **ConfirmDialog**, Drawer, Toast (+ provider), DropdownMenu, **Tooltip**, **Popover**, Combobox, DatePicker, CommandPalette, **NotificationsCenter**.
+- **Phase 6 — Auth:** LoginScreen (standard 4/5 **near-black brand** : 1/5 form split), ForgotPassword, ResetPassword (reuse the split shell; email via MetaMail), ChangePassword (in-app form).
+- **Phase 7 — Docs, gallery & skill:** per-component docs, pattern docs (page-shell, forms-and-validation, data-tables, navigation, feedback, auth, **permissions/RBAC**, **error-pages**, record/detail), self-contained `gallery/index.html` (both themes), `skills/ui-standards/SKILL.md`, and the top-level `README.md`.
+- **Phase 8 — Dataviz:** themed chart wrappers (line / bar / area / pie), Sparkline, and dashboard composition guidance following the `dataviz` palette & accessibility rules (themed via the generic tokens).
+
+Still **opt-in** (add on request, each would get its own phase/plan): tree view, calendar/scheduling, CSV import/export, 2FA/MFA. See the Admin-system coverage map in the design spec for the full picture.

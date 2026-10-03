@@ -170,13 +170,14 @@ Each component also has:
 Reuse workflow for an agent: copy the token files once into the target project, then
 copy the needed component `.tsx` + `.css` files. No build config required.
 
-### Component catalog (~30 core; see the coverage map below for the full admin picture)
-- **primitives**: Button, Input, Select, Textarea, Checkbox, Radio, Switch, FormField, Badge/StatusBadge
+### Component catalog (~34 core; see the coverage map below for the full admin picture)
+- **primitives**: Button, Input, Select, Textarea, Checkbox, Radio, Switch, FormField, Badge/StatusBadge, FileUpload (drag-drop + progress)
 - **data**: DataTable (**standard: column sorting + search + paging, all server-driven**; plus filter / bulk-actions), Pagination, StatCard, EmptyState, Skeleton
-- **overlay**: Modal (+ ConfirmDialog usage), Drawer, Toast, DropdownMenu, Tooltip, Popover, Combobox, DatePicker, CommandPalette
-- **layout**: AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card, DescriptionList (record fields)
+- **overlay**: Modal (+ ConfirmDialog usage), Drawer, Toast, DropdownMenu, Tooltip, Popover, Combobox, DatePicker, CommandPalette, NotificationsCenter
+- **layout**: AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card, DescriptionList (record fields), Stepper/Wizard
 - **auth**: LoginScreen, ChangePassword, ForgotPassword, ResetPassword
 - **theme**: the ERP theme engine ported — `registry.ts`, `useTheme`, `ThemeToggle`, `ThemePicker`, pre-paint script snippet
+- **dataviz**: themed chart wrappers (line / bar / area / pie), Sparkline, + dashboard composition guidance (follows the `dataviz` palette & a11y rules)
 
 ### Administration site layout contract (AppShell — ERP default)
 
@@ -400,8 +401,8 @@ components), not a new component; **Opt-in** = available on request, not built b
 - **Dirty-state / unsaved-changes guard** on forms — Pattern (Phase 7).
 - Record **create** (quick-create modal + full form page) and **edit** — Pattern
   (record patterns, Phase 7; mirrors the ERP Record Creation Pattern).
-- File upload / attachments — **Opt-in** (not in the default catalog).
-- Multi-step **wizard / stepper** — **Opt-in** (common for import/onboarding; add on request).
+- **File upload / attachments** (drag-drop, progress, type/size validation) — ✅ Phase 2.
+- Multi-step **wizard / stepper** — ✅ Phase 3.
 
 **Data display**
 - DataTable (server-driven sort/search/paging + filter + bulk actions + row selection) —
@@ -412,9 +413,10 @@ components), not a new component; **Opt-in** = available on request, not built b
 - **Record detail / read view** + **DescriptionList** (key-value record fields) — Pattern
   (+ a small DescriptionList), Phase 3/7.
 - Tags/chips — covered by Badge + a chip usage Pattern.
-- **Tree view**, **calendar/scheduling**, **charts / dataviz** — **Opt-in** (for charts,
-  follow the `dataviz` guidance; not built into the core catalog).
-- Import/export (CSV) — **Opt-in** (pairs with the wizard).
+- **Charts / dataviz** — ✅ Phase 8 (chart wrappers + dashboard guidance, following the
+  `dataviz` palette/accessibility rules, themed via the generic tokens).
+- **Tree view**, **calendar/scheduling** — **Opt-in** (add on request).
+- Import/export (CSV) — **Opt-in**, but now composes the in-scope Wizard + FileUpload.
 
 **Overlays, feedback & status**
 - Modal, Drawer, Toast, DropdownMenu — ✅ Phase 5.
@@ -424,7 +426,8 @@ components), not a new component; **Opt-in** = available on request, not built b
   (`feedback.md`, Phase 7) + Skeleton.
 - **Progress / Spinner** (determinate + indeterminate) — Pattern over motion tokens, Phase 5.
 - Status system (success/warning/error/info + holiday) via StatusBadge + status tokens — ✅.
-- Notifications center (in-app notifications panel) — **Opt-in** (Drawer/Popover + list).
+- **Notifications center** (in-app notifications panel: Drawer/Popover + list, read/unread,
+  mark-all-read) — ✅ Phase 5.
 - **Undo** affordance on toasts for reversible actions — Pattern.
 
 **Auth, account & access**
@@ -470,8 +473,9 @@ it opens directly in a browser for humans and agents to verify visually.
 
 - No npm package / build pipeline / versioning.
 - No Tailwind dependency — only a token-mapping appendix for projects that use Tailwind.
-- No charts / dataviz, wizard/stepper, tree view, calendar, notifications center,
-  file-upload (the Option-C extras) — can be added later once the pattern proves out.
+- Still out of scope (opt-in, add on request): tree view, calendar/scheduling, CSV
+  import/export, 2FA/MFA. (File upload, wizard/stepper, notifications center, and
+  charts/dataviz were pulled INTO scope — see §5 catalog + coverage map.)
 - No multi-theme catalog — two polished defaults plus the documented contract so each
   project adds its own themes.
 
@@ -479,14 +483,15 @@ it opens directly in a browser for humans and agents to verify visually.
 
 1. `tokens/` (structural + dark + light + JSON)
 2. `theme/` — port the ERP theme engine (registry.ts, useTheme, ThemeToggle, ThemePicker, pre-paint snippet) + day/night wiring
-3. `primitives/`
-4. `layout/` (AppShell, PageHeader, Tabs, Breadcrumbs, Card)
+3. `primitives/` (incl. FileUpload)
+4. `layout/` (AppShell, PageHeader, Tabs, Breadcrumbs, Card, DescriptionList, Stepper/Wizard)
 5. `data/`
-6. `overlay/`
+6. `overlay/` (incl. Tooltip, Popover, NotificationsCenter)
 7. `auth/`
-8. `docs/` (foundations, patterns, per-component specs)
-9. `gallery/index.html`
-10. `skills/ui-standards/SKILL.md` + README
+8. `dataviz/` (themed chart wrappers + Sparkline + dashboard guidance)
+9. `docs/` (foundations, patterns, per-component specs)
+10. `gallery/index.html`
+11. `skills/ui-standards/SKILL.md` + README
 
-Component groups (3–7) are independent and are good candidates for parallel agents,
+Component groups (3–8) are independent and are good candidates for parallel agents,
 each consuming the same tokens and theming contract.
