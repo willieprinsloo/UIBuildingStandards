@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ThemeToggle, ThemePicker, useTheme } from '@/components/theme';
+import { Gallery } from './Gallery';
 
 const NAV_ITEMS = ['Dashboard', 'Orders', 'Products', 'Customers', 'Settings'] as const;
 
@@ -141,6 +142,11 @@ export function App() {
                 </div>
               ))}
             </div>
+          </section>
+
+          <section className="showcase-section">
+            <h2 className="showcase-section__title">Component gallery</h2>
+            <Gallery />
           </section>
         </main>
       </div>

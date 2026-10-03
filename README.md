@@ -22,8 +22,8 @@ repo is the single source of truth:
   so even non-React projects can follow them.
 - **Components as code** — copy-paste TypeScript React components that implement the
   standards exactly, with zero runtime dependencies beyond React.
-- **An agent entry point** — a `ui-standards` skill (planned) that lets an AI agent apply
-  these standards inside any target repo.
+- **An agent entry point** — a `ui-standards` skill that lets an AI agent apply these
+  standards inside any target repo.
 
 ## Design principles
 
@@ -57,8 +57,8 @@ repo is the single source of truth:
 UIStandards/
 ├── docs/
 │   ├── foundations/        # design tokens, colour & theming, accessibility, pre-paint snippet
-│   ├── patterns/           # page-shell, forms, data-tables, navigation, feedback, auth (upcoming)
-│   └── components/          # per-component specs (upcoming)
+│   ├── patterns/           # auth (split-screen) — more patterns alongside components
+│   └── components/          # per-component specs: primitives, layout, data, overlay
 ├── src/
 │   ├── tokens/             # structural tokens + default themes
 │   │   ├── tokens.css      # theme-invariant structural tokens (:root)
@@ -99,7 +99,7 @@ Built in phases; each phase produces working, tested software.
 | 4 | Data — DataTable (server-driven sort/search/paging), Pagination, StatCard, EmptyState, Skeleton | ✅ Complete |
 | 5 | Overlay — Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette | ✅ Complete |
 | 6 | Auth — LoginScreen (split-screen), ChangePassword, ForgotPassword, ResetPassword | ✅ Complete |
-| 7 | Docs, gallery & `ui-standards` skill | ⏳ Planned |
+| 7 | Docs, gallery & `ui-standards` skill | ✅ Complete |
 
 Two standards worth calling out early:
 - **DataTable is server-driven** — column sorting, search, and paging are built in and
