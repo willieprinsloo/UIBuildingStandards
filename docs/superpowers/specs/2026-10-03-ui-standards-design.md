@@ -219,14 +219,26 @@ including an example wired to a paginated REST endpoint (`?page=&pageSize=&sort=
 
 The standard sign-in layout is a two-panel split screen:
 
-- **Left panel — description / brand (~4/5 width).** Product name/logo, a headline
-  and supporting description, optional marketing or illustrative content on a
-  branded surface (accent-tinted or `--bg-surface` gradient). This is the large,
-  visually dominant side.
-- **Right panel — login form (~1/5 width).** The actual sign-in form on a
-  `--bg-surface-1` panel: email/username, password, remember-me, submit,
-  "forgot password?" link. Narrow, focused column with a sensible `min-width`
-  (so the form stays usable on very wide screens) and vertically centered.
+- **Left panel — description / brand (~4/5 width).** A **dark, near-black brand
+  surface** (NOT a purple/accent-tinted panel) holding the product logo/wordmark, a
+  headline, and a short supporting description, optionally with restrained decoration.
+  This is the large, visually dominant, calm brand side.
+  - **Colour:** a dedicated token `--login-brand-bg` defaulting to **near-black**
+    (`#0C0D11`, the dark theme's `--bg-base`), with `--login-brand-text` as a light
+    off-white for the copy and `--login-brand-text-muted` for secondary lines. The
+    panel stays dark in BOTH light and dark mode — it is a fixed brand surface, not a
+    themed one — so the brand reads consistently regardless of the user's theme.
+  - **No purple, no accent fill.** The accent colour appears only sparingly (e.g. a
+    small logo mark, a link, or a thin detail), never as the panel background.
+  - **Type:** headline in `--type-display`/`--type-h1`, body in `--type-body`; generous
+    whitespace; content block vertically centered or anchored with comfortable padding.
+  - **Decoration (optional, subtle):** a faint low-contrast pattern, a soft radial glow,
+    or a product screenshot — always quiet enough that the near-black reads as the base.
+- **Right panel — login form (~1/5 width).** The actual sign-in form on a themed
+  `--bg-surface-1` panel (this side DOES follow the active theme): email/username,
+  password, remember-me, submit, "forgot password?" link. Narrow, focused column with a
+  sensible `min-width` (so the form stays usable on very wide screens) and vertically
+  centered.
 - **Responsive:** below a breakpoint the panels stack — form first (or the brand
   panel collapses to a slim header) so mobile users land on the form.
 - The same split-screen shell is reused for `ForgotPassword` and `ResetPassword`;
