@@ -178,6 +178,58 @@ copy the needed component `.tsx` + `.css` files. No build config required.
 - **auth**: LoginScreen, ChangePassword, ForgotPassword, ResetPassword
 - **theme**: the ERP theme engine ported — `registry.ts`, `useTheme`, `ThemeToggle`, `ThemePicker`, pre-paint script snippet
 
+### Administration site layout contract (AppShell — ERP default)
+
+Every administration site built on these standards uses the **same shell as the
+MetaLogix ERP**. This is the compliance baseline — deviations require explicit
+justification. It lands as code in Phase 3 (`AppShell`, `PageHeader`); documented here
+so it is built right.
+
+**Overall structure** — three regions:
+- A **top nav bar** spanning the full width, height `--topnav-height` (56px).
+- A **vertical left sidebar** (the primary site menu) below the top nav, width
+  `--sidebar-width-expanded` (240px) when expanded, `--sidebar-width-collapsed` (56px,
+  icons only) when collapsed.
+- A **scrollable content region** to the right of the sidebar, holding the page shell.
+
+**Vertical site menu (left sidebar) — the standard navigation:**
+- **One continuous surface** — the sidebar uses the SAME background as the page
+  (`--bg-base`), separated only by a single `--border-emphasis` line on its right edge.
+  No differently-coloured sidebar block (a colour block fragments the UI into two zones;
+  structure comes from borders + spacing, not colour).
+- **Nav items** — `--nav-item-height` (36px) each, icon-forward: a 20px icon + label,
+  with `--space-3` left padding.
+- **Active item** — a **2px left border in `--accent`**, an `--accent-subtle` background,
+  and `--accent` text. (Exactly one active item reflects the current route.)
+- **Sections** — grouped with muted section labels (caption size, uppercase, tracked —
+  the eyebrow style).
+- **Bottom section** — user avatar, settings, and logout, separated from the nav list by
+  a border.
+- **Collapse** — a chevron button at the sidebar bottom toggles expanded/collapsed; the
+  sidebar **auto-collapses below 1024px**. Collapsed state shows icons only (labels become
+  tooltips).
+
+**Top nav bar:** brand/logo or page/breadcrumb context on the left; global actions on the
+right (e.g. search, `ThemeToggle`/`ThemePicker`, notifications, user menu).
+
+**Page shell (inside the content region):** `.page` uses padding `--space-6 --space-8`
+(24px/32px), `display:flex; flex-direction:column; gap:--space-6` (24px), `min-height:0`
+(so scrolling children work). Tighten to `--space-4` padding + gap at ≤640px. Inside it:
+a **PageHeader** (title in `--type-h1` + optional subtitle in `--text-secondary`, with a
+right-aligned actions cluster; stacks to a column at ≤640px), then an optional toolbar,
+then the main content.
+
+**Page width archetypes** — exactly three sanctioned treatments (anything else is drift):
+1. **Full-width list/detail** — NO `max-width` on `.page` (list pages, hubs, detail pages).
+2. **Left-aligned wizard/form** — `max-width: calc(960px + var(--space-8)*2)`, no auto margin.
+3. **Centered narrow tool/document** — `max-width:<N>px; margin:0 auto; width:100%`.
+
+Never ship `max-width` WITHOUT `margin:0 auto` on a `.page` root (it leaves a left-stuck
+column). When a page mixes a form with a primary list, the list wins — full-width.
+
+Documented in `docs/patterns/page-shell.md` and `docs/patterns/navigation.md`; shown in
+the gallery and exercised by the demo app.
+
 ### DataTable contract (server-driven by default)
 
 The DataTable / list component is the backbone of admin systems, so its standard
