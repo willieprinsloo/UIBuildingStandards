@@ -1,0 +1,39 @@
+/* src/tokens/themes/precision.css — Default dark theme. Ported from MetaLogix ERP. */
+[data-theme="precision"] {
+  --bg-base: #0C0D11;
+  --bg-surface-1: #13141A;
+  --bg-surface-2: #1A1B23;
+  --bg-surface-3: #22232D;
+  --bg-inset: #0A0A0E;
+
+  --text-primary: #EDEDF0;
+  --text-secondary: #A0A1A8;
+  --text-tertiary: #7D7E87;
+  --text-muted: #5C5E68;
+  --text-on-accent: #FFFFFF;
+
+  --accent: #2E6BE6;
+  --accent-hover: #5B8DEF;
+  --accent-active: #2154C4;
+  --accent-subtle: rgba(46, 107, 230, 0.12);
+
+  --status-success: #34D399;
+  --status-success-subtle: rgba(52, 211, 153, 0.12);
+  --status-warning: #FBBF24;
+  --status-warning-subtle: rgba(251, 191, 36, 0.12);
+  --status-error: #F87171;
+  --status-error-subtle: rgba(248, 113, 113, 0.12);
+  --status-info: #60A5FA;
+  --status-info-subtle: rgba(96, 165, 250, 0.12);
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-emphasis: rgba(255, 255, 255, 0.14);
+  --border-focus: #2E6BE6;
+
+  /* Dark themes: shadows off — depth comes from surface lightness. */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+}
