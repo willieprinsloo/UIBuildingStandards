@@ -1,0 +1,38 @@
+/* src/tokens/themes/warehouse.css — Default light theme. Ported from MetaLogix ERP. */
+[data-theme="warehouse"] {
+  --bg-base: #F6F3EE;
+  --bg-surface-1: #FFFFFF;
+  --bg-surface-2: #FAFAF7;
+  --bg-surface-3: #FFFFFF;
+  --bg-inset: #EFECE6;
+
+  --text-primary: #1C1917;
+  --text-secondary: #57534E;
+  --text-tertiary: #6F6A65;
+  --text-muted: #8B8681;
+  --text-on-accent: #1C1917;
+
+  --accent: #0D9488;
+  --accent-hover: #0F766E;
+  --accent-active: #115E59;
+  --accent-subtle: rgba(13, 148, 136, 0.08);
+
+  --status-success: #16A34A;
+  --status-success-subtle: #F0FDF4;
+  --status-warning: #D97706;
+  --status-warning-subtle: #FFFBEB;
+  --status-error: #DC2626;
+  --status-error-subtle: #FEF2F2;
+  --status-info: #0284C7;
+  --status-info-subtle: #F0F9FF;
+
+  --border: rgba(28, 25, 23, 0.08);
+  --border-subtle: rgba(28, 25, 23, 0.05);
+  --border-emphasis: rgba(28, 25, 23, 0.15);
+  --border-focus: #0D9488;
+
+  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05);
+  --shadow-md: 0 2px 8px rgba(28, 25, 23, 0.08);
+  --shadow-lg: 0 8px 24px rgba(28, 25, 23, 0.12);
+  --shadow-xl: 0 16px 48px rgba(28, 25, 23, 0.16);
+}
