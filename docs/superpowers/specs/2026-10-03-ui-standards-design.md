@@ -72,7 +72,8 @@ UIStandards/
 │   ├── overlay/                 # Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette
 │   ├── layout/                  # AppShell (sidebar+topnav), PageHeader, Tabs, Breadcrumbs, Card
 │   ├── auth/                    # LoginScreen, ChangePassword, ForgotPassword, ResetPassword
-│   ├── theme/                   # ThemeProvider, useTheme, ThemeToggle
+│   ├── theme/                   # ERP theme engine (ported): registry.ts, useTheme.ts,
+│   │                            #   ThemeToggle, ThemePicker, pre-paint-snippet.md
 │   └── index.ts
 ├── gallery/
 │   └── index.html               # self-contained preview: every component, light/dark toggle
@@ -113,11 +114,40 @@ Required generic tokens:
   implementation from `apps/frontend/src/styles/themes/warehouse.css`), satisfying the
   same contract and WCAG floors.
 
-### Day / night mode (required, not optional)
-`ThemeProvider` sets `data-theme="dark|light"` on `<html>`, respects
-`prefers-color-scheme` on first load, allows a user override persisted to
-`localStorage`, and exposes `useTheme()` + a `ThemeToggle` component. All admin
-systems built from this standard ship with working day/night mode.
+### Theme engine (ported from the ERP — NOT reinvented)
+
+We port the ERP's proven theme engine verbatim (generalized, ERP-specific ids
+stripped), not a simplified provider. Its moving parts:
+
+- **`registry.ts`** — the single source of truth for theme metadata
+  (`id`, `label`, `shortLabel`, `mode`, `family`, `description`, `iconName`,
+  `swatch`, `sort`). Adding a theme = adding one registry entry + one CSS file;
+  every consumer (hook, toggle, picker) picks it up automatically. Exposes
+  `THEMES`, `THEME_IDS`, `ThemeId`, `getTheme(id)`, `themesByMode()`,
+  `themesByFamily()`.
+- **`useTheme()` hook** — resolves a stored `ThemePreference` (`'system'` or an
+  explicit `ThemeId`) to a `ResolvedTheme`; `'system'` follows
+  `prefers-color-scheme` mapped to the canonical pair (dark→default-dark,
+  light→default-light); persists to `localStorage`; and writes **two**
+  attributes on `<html>`: `data-theme` (the id) and `data-theme-mode`
+  (dark/light, resolved from the registry). Mode-dependent CSS (scrollbars,
+  image darkening) keys off `data-theme-mode` so it never enumerates theme ids.
+- **Pre-paint script** — a tiny inline script for the host app's `index.html`
+  that reads the persisted preference/mode and writes the attributes before
+  first paint, preventing a theme/scrollbar flash. Ships as a documented
+  snippet.
+- **`ThemeToggle`** — quick dark/light switch.
+- **`ThemePicker`** — the Linear-grade picker (trigger swatch + grouped,
+  searchable popover) for apps exposing the full theme catalog.
+- **CSS architecture** — structural `tokens.css` in `:root`; one CSS file per
+  theme mapping theme primitives → the generic-token contract; a `global.css`
+  that imports the active theme files. Documented in `color-and-theming.md`.
+
+We ship the two canonical themes (default dark + default light) wired through
+this engine. The engine scales to N themes exactly as the ERP's does (36 today),
+so any project can add its own themes by following the registry checklist — no
+engine changes. Day/night mode is therefore a built-in, required capability of
+every app built on this standard.
 
 ### Accessibility floors (hard requirements, documented in `accessibility.md`)
 - WCAG AA contrast minimums for text and UI (per the ERP's documented floors).
@@ -146,7 +176,7 @@ copy the needed component `.tsx` + `.css` files. No build config required.
 - **overlay**: Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette
 - **layout**: AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card
 - **auth**: LoginScreen, ChangePassword, ForgotPassword, ResetPassword
-- **theme**: ThemeProvider, useTheme, ThemeToggle
+- **theme**: the ERP theme engine ported — `registry.ts`, `useTheme`, `ThemeToggle`, `ThemePicker`, pre-paint script snippet
 
 ### DataTable contract (server-driven by default)
 
@@ -215,7 +245,7 @@ it opens directly in a browser for humans and agents to verify visually.
 ## 9. Build sequence (for the implementation plan)
 
 1. `tokens/` (structural + dark + light + JSON)
-2. `theme/` (ThemeProvider, useTheme, ThemeToggle) + day/night wiring
+2. `theme/` — port the ERP theme engine (registry.ts, useTheme, ThemeToggle, ThemePicker, pre-paint snippet) + day/night wiring
 3. `primitives/`
 4. `layout/` (AppShell, PageHeader, Tabs, Breadcrumbs, Card)
 5. `data/`
