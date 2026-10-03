@@ -236,6 +236,32 @@ so it is built right.
 - **Badges:** a nav item may carry a count/status badge (e.g. unread) right-aligned; keep it
   subtle and token-driven.
 
+**Account / user section (pinned to the sidebar bottom):**
+- **Placement** — always the last block in the sidebar, pinned to the bottom and separated
+  from the nav groups by a border. Present on every admin screen.
+- **Trigger** — the user's **avatar** (image, or initials fallback on an `--accent`/neutral
+  circle) + **display name**, with a secondary line (email, role, or active org/tenant) in
+  `--text-secondary`. A chevron hints it opens a menu. In the collapsed sidebar only the
+  avatar shows.
+- **Opens a user menu** — a `DropdownMenu` (overlay component, Phase 5) that opens **upward**
+  from the trigger (a flyout popover when the sidebar is collapsed). Full menu a11y:
+  `role="menu"`/`menuitem`, arrow-key navigation, `Escape` closes and returns focus, visible
+  focus rings.
+- **Standard menu contents (in this order):**
+  1. **My profile / account** — view/edit the user's own profile.
+  2. **Settings** — app/account settings (or the settings area entry if app-wide).
+  3. **Appearance / theme** — quick theme control; may embed the `ThemeToggle` or link to a
+     fuller appearance page (`ThemePicker`).
+  4. *(optional)* **Organisation / workspace switcher** — for multi-tenant apps, switch the
+     active org/tenant.
+  5. *(optional)* **Help & support / docs / keyboard shortcuts.**
+  6. — divider —
+  7. **Log out** — **always last**, visually distinct (treated as a destructive/strong
+     action). Logs out immediately; if there is unsaved work, confirm first.
+- **Model** — the account section is configured separately from `nav` (it is not a
+  `NavGroup`), e.g. an `account: { user: {...}, items: NavItem[] }` passed to `AppShell`,
+  so `Log out` and the switcher can carry their own handlers rather than plain routes.
+
 **Nav configuration shape** (drives `AppShell`, Phase 3 — data, not markup):
 
 ```ts
