@@ -1,0 +1,38 @@
+/* src/components/data/Pagination.css — page navigator. Tokens only. */
+.ui-pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.ui-pagination__btn {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface-1);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font: var(--type-label);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.ui-pagination__btn:hover:not(:disabled) {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+}
+.ui-pagination__btn--active {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.ui-pagination__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.ui-pagination__gap {
+  padding: 0 var(--space-1);
+  color: var(--text-tertiary);
+}

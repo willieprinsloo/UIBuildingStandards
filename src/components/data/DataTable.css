@@ -1,0 +1,105 @@
+/* src/components/data/DataTable.css — server-driven table. Tokens only. */
+.ui-datatable {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.ui-datatable__toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+.ui-datatable__search {
+  width: 100%;
+  max-width: 18rem;
+  height: var(--input-height);
+  padding: 0 var(--space-3);
+  background: var(--bg-surface-1);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font: var(--type-body);
+}
+.ui-datatable__search:focus-visible {
+  border-color: var(--border-focus);
+}
+
+.ui-datatable__scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.ui-datatable__table {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--type-body);
+}
+.ui-datatable__th {
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-surface-2);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+.ui-datatable__th--right {
+  text-align: right;
+}
+.ui-datatable__th--center {
+  text-align: center;
+}
+.ui-datatable__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.ui-datatable__sort:hover {
+  color: var(--text-primary);
+}
+.ui-datatable__sort-glyph {
+  color: var(--text-muted);
+  font-size: 0.85em;
+}
+
+.ui-datatable__td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+.ui-datatable__td--right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ui-datatable__td--center {
+  text-align: center;
+}
+.ui-datatable__table tbody tr:last-child .ui-datatable__td {
+  border-bottom: none;
+}
+.ui-datatable__table tbody tr:hover .ui-datatable__td {
+  background: var(--bg-surface-1);
+}
+
+.ui-datatable__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.ui-datatable__count {
+  color: var(--text-tertiary);
+  font-size: var(--type-caption-size);
+  font-variant-numeric: tabular-nums;
+}

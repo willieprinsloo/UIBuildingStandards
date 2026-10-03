@@ -1,0 +1,26 @@
+/* src/components/data/Skeleton.css — loading placeholder. Tokens only. */
+.ui-skeleton {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface-2) 25%,
+    var(--bg-surface-3) 37%,
+    var(--bg-surface-2) 63%
+  );
+  background-size: 400% 100%;
+  border-radius: var(--radius-sm);
+  animation: ui-skeleton-shimmer var(--duration-loop-skeleton) ease-in-out infinite;
+}
+@keyframes ui-skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-skeleton {
+    animation: none;
+  }
+}
