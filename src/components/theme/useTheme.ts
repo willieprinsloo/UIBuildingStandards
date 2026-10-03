@@ -31,10 +31,6 @@ function modeOf(resolved: ResolvedTheme): ThemeMode {
   return getTheme(resolved)?.mode ?? resolveSystemMode();
 }
 
-function resolveTheme(preference: ThemePreference): ResolvedTheme {
-  return preference === 'system' ? resolveSystemTheme() : preference;
-}
-
 function readStoredPreference(): ThemePreference {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -64,7 +60,11 @@ export interface UseThemeReturn {
 
 export function useTheme(): UseThemeReturn {
   const [preference, setPreferenceState] = useState<ThemePreference>(readStoredPreference);
-  const resolvedTheme = useMemo<ResolvedTheme>(() => resolveTheme(preference), [preference]);
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(resolveSystemTheme);
+  const resolvedTheme = useMemo<ResolvedTheme>(
+    () => (preference === 'system' ? systemTheme : preference),
+    [preference, systemTheme]
+  );
 
   useEffect(() => {
     applyTheme(resolvedTheme);
@@ -78,7 +78,7 @@ export function useTheme(): UseThemeReturn {
   useEffect(() => {
     if (preference !== 'system' || !window.matchMedia) return;
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const handle = () => applyTheme(resolveSystemTheme());
+    const handle = () => setSystemTheme(resolveSystemTheme());
     if (mq.addEventListener) {
       mq.addEventListener('change', handle);
       return () => mq.removeEventListener('change', handle);
