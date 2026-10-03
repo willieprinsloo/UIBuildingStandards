@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Standards — Phase 1 Demo</title>
+
+    <!-- Pre-paint theme script (FOUC prevention) — verbatim from docs/foundations/pre-paint-snippet.md -->
+    <script>
+      (function () {
+        try {
+          var pref = localStorage.getItem('ui-theme');      // theme id or 'system' or null
+          var mode = localStorage.getItem('ui-theme-mode');  // 'dark' | 'light' | null
+          var systemDark = matchMedia('(prefers-color-scheme: dark)').matches;
+          var resolvedMode = mode || (systemDark ? 'dark' : 'light');
+          // Canonical pair when preference is 'system' or unset.
+          var theme = (pref && pref !== 'system') ? pref
+            : (resolvedMode === 'dark' ? 'precision' : 'warehouse');
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.setAttribute('data-theme-mode', resolvedMode);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'precision');
+          document.documentElement.setAttribute('data-theme-mode', 'dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/demo/main.tsx"></script>
+  </body>
+</html>

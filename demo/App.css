@@ -1,0 +1,236 @@
+/* demo/App.css — Phase 1 demo shell + token showcase styles.
+ * Every value below is a generic token (var(--...)). No hardcoded hex colors.
+ * Flipping the theme (toggle/picker) restyles this page because nothing here
+ * is theme-specific — only `src/tokens/themes/<id>.css` defines color values.
+ */
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font: var(--type-body);
+  color: var(--text-primary);
+  background: var(--bg-base);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ─── Topbar ─── */
+
+.topbar {
+  flex: 0 0 var(--topnav-height);
+  height: var(--topnav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+  background: var(--bg-surface-1);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar__brand {
+  font: var(--type-h2);
+  color: var(--text-primary);
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ─── Body: sidebar + content ─── */
+
+.shell__body {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+}
+
+.sidebar {
+  flex: 0 0 var(--sidebar-width-expanded);
+  width: var(--sidebar-width-expanded);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-2);
+  background: var(--bg-surface-1);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+.sidebar__item {
+  height: var(--nav-item-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font: var(--type-label);
+  text-align: left;
+  cursor: pointer;
+}
+
+.sidebar__item:hover {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+}
+
+.sidebar__item--active {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.content {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-y: auto;
+  padding: var(--space-8);
+}
+
+/* ─── Showcase ─── */
+
+.showcase-intro {
+  margin-bottom: var(--space-8);
+}
+
+.showcase-intro__title {
+  font: var(--type-display);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.showcase-intro__subtitle {
+  font: var(--type-body);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.showcase-section {
+  margin-bottom: var(--space-8);
+}
+
+.showcase-section__title {
+  font: var(--type-h2);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+/* Swatches */
+
+.swatch-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.swatch__tile {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.swatch__label {
+  font: var(--type-caption);
+  color: var(--text-tertiary);
+}
+
+/* Typography samples */
+
+.type-samples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.type-samples__row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--space-3);
+}
+
+.type-samples__label {
+  flex: 0 0 140px;
+  font: var(--type-caption);
+  color: var(--text-tertiary);
+}
+
+.type-samples__text {
+  color: var(--text-primary);
+}
+
+/* Spacing scale */
+
+.space-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.space-row__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.space-row__bar {
+  height: var(--space-4);
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+}
+
+.space-row__label {
+  font: var(--type-caption);
+  color: var(--text-tertiary);
+}
+
+/* Radius scale */
+
+.radius-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.radius-row__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.radius-row__box {
+  width: 56px;
+  height: 56px;
+  background: var(--bg-surface-3);
+  border: 1px solid var(--border-emphasis);
+}
+
+.radius-row__label {
+  font: var(--type-caption);
+  color: var(--text-tertiary);
+}
