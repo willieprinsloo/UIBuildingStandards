@@ -97,7 +97,7 @@ Built in phases; each phase produces working, tested software.
 | 2 | Primitives — Button, Input, Select, Textarea, Checkbox, Radio, Switch, FormField, Badge | ✅ Complete |
 | 3 | Layout & shell — AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card | ✅ Complete |
 | 4 | Data — DataTable (server-driven sort/search/paging), Pagination, StatCard, EmptyState, Skeleton | ✅ Complete |
-| 5 | Overlay — Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette | ⏳ Planned |
+| 5 | Overlay — Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette | ✅ Complete |
 | 6 | Auth — LoginScreen (split-screen) ✅ · ChangePassword, ForgotPassword, ResetPassword ⏳ | 🔸 In progress |
 | 7 | Docs, gallery & `ui-standards` skill | ⏳ Planned |
 

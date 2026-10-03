@@ -1,0 +1,103 @@
+/* src/components/overlay/DatePicker.css — date field + calendar. Tokens only. */
+.ui-datepicker {
+  position: relative;
+  display: inline-block;
+}
+.ui-datepicker__field {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-width: 11rem;
+  height: var(--input-height);
+  padding: 0 var(--space-3);
+  background: var(--bg-surface-1);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font: var(--type-body);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.ui-datepicker__placeholder {
+  color: var(--text-muted);
+}
+.ui-datepicker__icon {
+  color: var(--text-tertiary);
+}
+.ui-datepicker__popover {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  z-index: var(--z-popover);
+  padding: var(--space-3);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+.ui-datepicker__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+.ui-datepicker__nav button {
+  background: none;
+  border: none;
+  font-size: var(--type-h3-size);
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0 var(--space-2);
+}
+.ui-datepicker__nav button:hover {
+  color: var(--text-primary);
+}
+.ui-datepicker__month {
+  font-weight: var(--type-body-emphasis-weight);
+  font-size: var(--type-label-size);
+}
+.ui-datepicker__weekdays,
+.ui-datepicker__week {
+  display: grid;
+  grid-template-columns: repeat(7, 2rem);
+  gap: var(--space-1);
+}
+.ui-datepicker__weekdays {
+  margin-bottom: var(--space-1);
+}
+.ui-datepicker__weekdays span {
+  text-align: center;
+  font-size: var(--type-caption-size);
+  color: var(--text-tertiary);
+}
+.ui-datepicker__day {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font: var(--type-label);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.ui-datepicker__day:hover:not(:disabled) {
+  background: var(--bg-surface-3);
+}
+.ui-datepicker__day--muted {
+  color: var(--text-muted);
+}
+.ui-datepicker__day--selected {
+  background: var(--accent);
+  color: var(--text-on-accent);
+}
+.ui-datepicker__day:disabled {
+  color: var(--text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
