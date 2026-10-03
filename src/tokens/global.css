@@ -1,0 +1,14 @@
+/* src/tokens/global.css
+ * The single stylesheet a host app imports. ORDER MATTERS:
+ *   1. structural tokens (:root, theme-invariant)
+ *   2. every theme file ([data-theme="<id>"])
+ * Adding a theme = add its CSS file + one @import line here + a registry entry.
+ * A missing @import leaves that theme's generic tokens undefined — a loud failure.
+ */
+@import './tokens.css';
+
+/* Dark themes */
+@import './themes/precision.css';
+
+/* Light themes */
+@import './themes/warehouse.css';
