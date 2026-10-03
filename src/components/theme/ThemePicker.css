@@ -1,0 +1,82 @@
+/* src/components/theme/ThemePicker.css */
+.ui-theme-picker { position: relative; display: inline-block; }
+
+.ui-theme-picker__trigger,
+.ui-theme-picker__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--type-body);
+  color: var(--text-primary);
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+}
+.ui-theme-picker__trigger:focus-visible,
+.ui-theme-picker__option:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.ui-theme-picker__popover {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  right: 0;
+  z-index: var(--z-dropdown);
+  min-width: 220px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: var(--space-2);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ui-theme-picker__option {
+  width: 100%;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+}
+.ui-theme-picker__option:hover { background: var(--accent-subtle); }
+.ui-theme-picker__option[aria-selected='true'] {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.ui-theme-picker__group { display: flex; flex-direction: column; gap: 2px; }
+.ui-theme-picker__group-label {
+  font: var(--type-eyebrow-weight) var(--type-eyebrow-size) / 1 var(--font-sans);
+  letter-spacing: var(--type-eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: var(--space-2) var(--space-3) var(--space-1);
+}
+
+.ui-theme-picker__swatch {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  flex: none;
+  overflow: hidden;
+}
+.ui-theme-picker__swatch > span {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+}
+.ui-theme-picker__swatch--system {
+  background: linear-gradient(135deg, #0C0D11 0 50%, #F6F3EE 50% 100%);
+}
+.ui-theme-picker__label { white-space: nowrap; }
