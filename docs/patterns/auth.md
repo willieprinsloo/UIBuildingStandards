@@ -1,12 +1,13 @@
-# Auth — LoginScreen (Phase 6, in progress)
+# Auth — LoginScreen + password forms (Phase 6)
 
 The standard sign-in layout is a **split screen**: a large brand / description
 panel beside a focused form panel. `LoginScreen` owns the layout only — both
 sides are slots, and it references ONLY generic tokens, so it inherits any
 theme. Copy `LoginScreen.tsx` + `LoginScreen.css` into a project and import it.
 
-> Delivered so far in Phase 6: `LoginScreen` (the split-screen shell).
-> `ChangePassword`, `ForgotPassword`, `ResetPassword` remain planned.
+> Phase 6 components: `LoginScreen` (split-screen shell), `ChangePassword`
+> (in-app), and `ForgotPassword` / `ResetPassword` (slot into the LoginScreen
+> form panel). All built from the Phase 2 primitives.
 
 ## LoginScreen — `LoginScreen.tsx` + `LoginScreen.css`
 

@@ -98,7 +98,7 @@ Built in phases; each phase produces working, tested software.
 | 3 | Layout & shell — AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card | ✅ Complete |
 | 4 | Data — DataTable (server-driven sort/search/paging), Pagination, StatCard, EmptyState, Skeleton | ✅ Complete |
 | 5 | Overlay — Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette | ✅ Complete |
-| 6 | Auth — LoginScreen (split-screen) ✅ · ChangePassword, ForgotPassword, ResetPassword ⏳ | 🔸 In progress |
+| 6 | Auth — LoginScreen (split-screen), ChangePassword, ForgotPassword, ResetPassword | ✅ Complete |
 | 7 | Docs, gallery & `ui-standards` skill | ⏳ Planned |
 
 Two standards worth calling out early:

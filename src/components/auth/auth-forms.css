@@ -1,0 +1,43 @@
+/* src/components/auth/auth-forms.css — shared auth form styling. Tokens only. */
+.ui-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.ui-auth-form__title {
+  margin: 0;
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  letter-spacing: var(--type-h2-tracking);
+  color: var(--text-primary);
+}
+.ui-auth-form__lede {
+  margin: 0;
+  color: var(--text-secondary);
+}
+.ui-auth-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.ui-auth-form__error {
+  margin: 0;
+  color: var(--status-error);
+  font-size: var(--type-label-size);
+}
+.ui-auth-form__success {
+  margin: 0;
+  color: var(--status-success);
+}
+.ui-auth-form__footer {
+  margin: 0;
+  font-size: var(--type-caption-size);
+  color: var(--text-tertiary);
+}
+.ui-auth-form__footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.ui-auth-form__footer a:hover {
+  text-decoration: underline;
+}
