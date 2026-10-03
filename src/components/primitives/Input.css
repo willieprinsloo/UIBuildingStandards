@@ -1,0 +1,63 @@
+/* src/components/primitives/Input.css — shared by Input, Textarea, Select. */
+.ui-input,
+.ui-textarea,
+.ui-select {
+  width: 100%;
+  font: var(--type-body);
+  color: var(--text-primary);
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-base) var(--ease-default),
+    box-shadow var(--duration-base) var(--ease-default);
+}
+
+.ui-input,
+.ui-select {
+  height: var(--input-height);
+  padding: 0 var(--space-3);
+}
+
+.ui-textarea {
+  min-height: calc(var(--input-height) * 2);
+  padding: var(--space-2) var(--space-3);
+  resize: vertical;
+}
+
+.ui-input::placeholder,
+.ui-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.ui-input:focus-visible,
+.ui-textarea:focus-visible,
+.ui-select:focus-visible {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px var(--accent-subtle);
+}
+
+.ui-input:disabled,
+.ui-textarea:disabled,
+.ui-select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ui-input--invalid,
+.ui-textarea--invalid,
+.ui-select--invalid,
+.ui-input[aria-invalid='true'],
+.ui-textarea[aria-invalid='true'],
+.ui-select[aria-invalid='true'] {
+  border-color: var(--status-error);
+}
+.ui-input--invalid:focus-visible,
+.ui-textarea--invalid:focus-visible,
+.ui-select--invalid:focus-visible,
+.ui-input[aria-invalid='true']:focus-visible,
+.ui-textarea[aria-invalid='true']:focus-visible,
+.ui-select[aria-invalid='true']:focus-visible {
+  border-color: var(--status-error);
+  box-shadow: 0 0 0 2px var(--status-error-subtle);
+}

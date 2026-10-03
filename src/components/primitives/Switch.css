@@ -1,0 +1,72 @@
+/* src/components/primitives/Switch.css — native checkbox, visual track/thumb. */
+.ui-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--type-body);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* The real control: visually hidden but still focusable + in the a11y tree. */
+.ui-switch__control {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.ui-switch__track {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex: none;
+  background: var(--bg-surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  transition: background var(--duration-base) var(--ease-default);
+}
+
+.ui-switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: var(--text-secondary);
+  border-radius: var(--radius-full);
+  transition: transform var(--duration-base) var(--ease-default),
+    background var(--duration-base) var(--ease-default);
+}
+
+.ui-switch__control:checked + .ui-switch__track {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.ui-switch__control:checked + .ui-switch__track .ui-switch__thumb {
+  transform: translateX(16px);
+  background: var(--text-on-accent);
+}
+
+.ui-switch__control:focus-visible + .ui-switch__track {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.ui-switch__control:disabled + .ui-switch__track {
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-switch__track,
+  .ui-switch__thumb {
+    transition: none;
+  }
+}

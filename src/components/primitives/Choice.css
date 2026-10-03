@@ -1,0 +1,31 @@
+/* src/components/primitives/Choice.css — Checkbox + Radio (native, themed). */
+.ui-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--type-body);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.ui-choice__control {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  /* Themeable check/fill without custom markup. */
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.ui-choice__control:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.ui-choice__control:disabled {
+  cursor: not-allowed;
+}
+.ui-choice:has(.ui-choice__control:disabled) {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

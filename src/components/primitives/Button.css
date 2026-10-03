@@ -1,0 +1,100 @@
+/* src/components/primitives/Button.css — generic tokens only. */
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font: var(--type-label);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--duration-base) var(--ease-default),
+    border-color var(--duration-base) var(--ease-default),
+    color var(--duration-base) var(--ease-default);
+}
+
+.ui-button--sm {
+  height: 28px;
+  padding: 0 var(--space-3);
+}
+.ui-button--md {
+  height: var(--input-height);
+  padding: 0 var(--space-4);
+}
+.ui-button--full {
+  width: 100%;
+}
+
+.ui-button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.ui-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* primary */
+.ui-button--primary {
+  background: var(--accent);
+  color: var(--text-on-accent);
+}
+.ui-button--primary:not(:disabled):hover {
+  background: var(--accent-hover);
+}
+.ui-button--primary:not(:disabled):active {
+  background: var(--accent-active);
+}
+
+/* secondary */
+.ui-button--secondary {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+.ui-button--secondary:not(:disabled):hover {
+  background: var(--bg-surface-3);
+  border-color: var(--border-emphasis);
+}
+
+/* ghost */
+.ui-button--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.ui-button--ghost:not(:disabled):hover {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+}
+
+/* danger */
+.ui-button--danger {
+  background: var(--status-error);
+  color: var(--text-on-accent);
+}
+.ui-button--danger:not(:disabled):hover {
+  filter: brightness(1.08);
+}
+
+.ui-button__spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: ui-button-spin var(--duration-loop-spinner) linear infinite;
+}
+
+@keyframes ui-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-button__spinner {
+    animation-duration: 0ms;
+  }
+}

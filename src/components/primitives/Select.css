@@ -1,0 +1,22 @@
+/* src/components/primitives/Select.css — native select + a chevron. */
+.ui-select-wrap {
+  position: relative;
+  display: block;
+}
+
+.ui-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: var(--space-8);
+  cursor: pointer;
+}
+
+.ui-select__chevron {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-tertiary);
+  font-size: var(--type-caption-size);
+}
