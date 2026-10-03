@@ -1,0 +1,78 @@
+/* src/components/data/StatCard.css — dashboard stat tile. Generic tokens only. */
+
+.ui-statcard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 9rem;
+  padding: var(--space-4);
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.ui-statcard__icon {
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-1);
+  line-height: 1;
+}
+
+.ui-statcard__label {
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-caption-weight);
+  letter-spacing: var(--type-eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.ui-statcard__value {
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  letter-spacing: var(--type-display-tracking);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.ui-statcard__hint {
+  font-size: var(--type-caption-size);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.ui-statcard__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+  font-size: var(--type-caption-size);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+.ui-statcard__trend--up {
+  color: var(--status-success);
+}
+.ui-statcard__trend--down {
+  color: var(--status-error);
+}
+.ui-statcard__trend--flat {
+  color: var(--text-tertiary);
+}
+
+/* Tones: colour the value (and, for accent, lift the surface). */
+.ui-statcard--accent {
+  background: var(--bg-surface-2);
+  border-color: var(--border-emphasis);
+}
+.ui-statcard--accent .ui-statcard__value {
+  color: var(--accent);
+}
+.ui-statcard--success .ui-statcard__value {
+  color: var(--status-success);
+}
+.ui-statcard--warning .ui-statcard__value {
+  color: var(--status-warning);
+}
+.ui-statcard--error .ui-statcard__value {
+  color: var(--status-error);
+}
