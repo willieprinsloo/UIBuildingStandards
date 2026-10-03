@@ -236,6 +236,12 @@ This `LoginScreen` layout is the documented default in `docs/patterns/auth.md` a
 shown in the gallery. The 4/5 : 1/5 ratio is the standard; the left panel content
 is a slot the consuming project fills with its own description/brand.
 
+**Transactional email:** `ForgotPassword` / `ResetPassword` and sign-up verification
+send email via **MetaMail**, the MetaLogix transactional email platform. The frontend
+triggers a backend endpoint (never calling MetaMail directly with an API key); the
+backend sends through MetaMail. See `docs/references/metamail.md` and the API docs at
+https://metamail.metalogix.solutions/api-docs (or `/metaMailAgent`).
+
 ## 6. The Skill
 
 `skills/ui-standards/SKILL.md` instructs an agent working in any repo to:

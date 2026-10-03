@@ -109,6 +109,13 @@ Two standards worth calling out early:
 
 Full design: [`docs/superpowers/specs/2026-10-03-ui-standards-design.md`](docs/superpowers/specs/2026-10-03-ui-standards-design.md).
 
+## Related MetaLogix services
+
+- **MetaMail — transactional email.** Auth flows (password reset, email verification) and
+  notifications send mail via MetaMail. See [`docs/references/metamail.md`](docs/references/metamail.md)
+  and the live API docs at <https://metamail.metalogix.solutions/api-docs> (or ask
+  `/metaMailAgent`).
+
 ## Development
 
 ```bash
