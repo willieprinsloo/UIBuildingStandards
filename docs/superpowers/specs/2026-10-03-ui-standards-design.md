@@ -142,11 +142,48 @@ copy the needed component `.tsx` + `.css` files. No build config required.
 
 ### Component catalog (~24)
 - **primitives**: Button, Input, Select, Textarea, Checkbox, Radio, Switch, FormField, Badge/StatusBadge
-- **data**: DataTable (sort / filter / bulk-actions), Pagination, StatCard, EmptyState, Skeleton
+- **data**: DataTable (**standard: column sorting + search + paging, all server-driven**; plus filter / bulk-actions), Pagination, StatCard, EmptyState, Skeleton
 - **overlay**: Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette
 - **layout**: AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card
 - **auth**: LoginScreen, ChangePassword, ForgotPassword, ResetPassword
 - **theme**: ThemeProvider, useTheme, ThemeToggle
+
+### DataTable contract (server-driven by default)
+
+The DataTable / list component is the backbone of admin systems, so its standard
+behavior is fixed:
+
+- **Column sorting**, **search**, and **paging** are built-in and enabled by default.
+- **Search and paging are performed on the server** — the component is a *controlled*
+  component. It does NOT fetch or filter data itself; it raises a single query-state
+  object and renders whatever rows it is given.
+- Sorting is server-driven for the same reason (the server returns the sorted,
+  searched, paged page of rows). A documented client-side fallback is allowed for
+  small, fully-loaded datasets, but server-side is the default and the documented path.
+
+The component exposes a controlled query state and change callback, e.g.:
+
+```ts
+interface DataTableQuery {
+  page: number;          // 1-based
+  pageSize: number;
+  sort?: { columnId: string; direction: 'asc' | 'desc' };
+  search?: string;       // debounced free-text search term
+}
+
+interface DataTableProps<Row> {
+  columns: ColumnDef<Row>[];
+  rows: Row[];           // the current page of rows, already sorted/searched/paged by the server
+  total: number;         // total matching rows across all pages — drives Pagination
+  query: DataTableQuery;
+  onQueryChange: (next: DataTableQuery) => void; // fires on sort / search / page change
+  loading?: boolean;     // shows Skeleton rows while the server round-trips
+}
+```
+
+Consuming the callback (debounced search, mapping `query` to API params, showing
+`loading` during the round-trip) is documented in `docs/patterns/data-tables.md`,
+including an example wired to a paginated REST endpoint (`?page=&pageSize=&sort=&q=`).
 
 ## 6. The Skill
 
