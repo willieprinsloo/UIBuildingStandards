@@ -215,6 +215,27 @@ Consuming the callback (debounced search, mapping `query` to API params, showing
 `loading` during the round-trip) is documented in `docs/patterns/data-tables.md`,
 including an example wired to a paginated REST endpoint (`?page=&pageSize=&sort=&q=`).
 
+### LoginScreen layout contract (standard split-screen)
+
+The standard sign-in layout is a two-panel split screen:
+
+- **Left panel — description / brand (~4/5 width).** Product name/logo, a headline
+  and supporting description, optional marketing or illustrative content on a
+  branded surface (accent-tinted or `--bg-surface` gradient). This is the large,
+  visually dominant side.
+- **Right panel — login form (~1/5 width).** The actual sign-in form on a
+  `--bg-surface-1` panel: email/username, password, remember-me, submit,
+  "forgot password?" link. Narrow, focused column with a sensible `min-width`
+  (so the form stays usable on very wide screens) and vertically centered.
+- **Responsive:** below a breakpoint the panels stack — form first (or the brand
+  panel collapses to a slim header) so mobile users land on the form.
+- The same split-screen shell is reused for `ForgotPassword` and `ResetPassword`;
+  `ChangePassword` is an in-app form (no split screen, lives inside the AppShell).
+
+This `LoginScreen` layout is the documented default in `docs/patterns/auth.md` and
+shown in the gallery. The 4/5 : 1/5 ratio is the standard; the left panel content
+is a slot the consuming project fills with its own description/brand.
+
 ## 6. The Skill
 
 `skills/ui-standards/SKILL.md` instructs an agent working in any repo to:
