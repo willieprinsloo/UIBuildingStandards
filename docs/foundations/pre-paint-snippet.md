@@ -25,8 +25,10 @@ know which themes exist — it only reads what `useTheme` persisted.
 </script>
 ```
 
-Then import the tokens once in your app entry:
+Then import the tokens once in your app entry. Phase 1 is consumed by copying the
+files in, so import the path where you copied `tokens/` into your project:
 
 ```ts
-import '@metalogix/ui-standards/tokens/global.css'; // or the copied path
+import './tokens/global.css'; // the copied path in your project
+// (or, if this is ever published as a package: '@metalogix/ui-standards/tokens/global.css')
 ```
