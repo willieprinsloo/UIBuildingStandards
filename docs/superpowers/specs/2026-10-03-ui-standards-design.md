@@ -209,6 +209,51 @@ so it is built right.
   sidebar **auto-collapses below 1024px**. Collapsed state shows icons only (labels become
   tooltips).
 
+**Menu grouping (how the sidebar is organised):**
+- **Groups = labelled sections.** Related nav items are organised into groups, each with a
+  muted uppercase/tracked **section label** (eyebrow style). Groups are separated by spacing
+  (and, where it aids scanning, a subtle divider).
+- **Ordering convention (top → bottom):**
+  1. A single **primary/overview item** (e.g. Dashboard/Home) at the very top, *ungrouped*.
+  2. **Functional groups** in order of importance / daily use — typically one group per
+     domain or module (e.g. *Sales*, *Inventory*, *Purchasing*, *Reports*). Order groups by
+     how often they're used, most-used first.
+  3. A **bottom/account section** (user, settings, logout), pinned to the bottom and
+     separated by a border — this is always last.
+- **When to group:** group once a flat list gets hard to scan (rule of thumb: **> ~7
+  items**, or whenever there are clear domains). Small apps may stay flat (no section
+  labels) — that's allowed; don't invent groups for 3–4 items.
+- **Group size:** aim for **~3–7 items per group**; if a group grows beyond that, split it or
+  promote it to its own area. Avoid single-item groups (just leave the item ungrouped).
+- **Nesting / sub-menus:** prefer **flat groups**. At most **one level** of expandable
+  sub-items under a parent item, for a module with many pages — never deeper. Use *either*
+  section grouping *or* expandable parents for a given area, consistently, not both at once.
+  An expandable parent shows a chevron, remembers open/closed state, and marks the parent as
+  active when a child route is active.
+- **Collapsed sidebar (≤1024px or manual):** section **labels are hidden**; groups are shown
+  as icon clusters separated by a divider/extra spacing, labels become tooltips. Expandable
+  parents open as a flyout popover rather than inline.
+- **Badges:** a nav item may carry a count/status badge (e.g. unread) right-aligned; keep it
+  subtle and token-driven.
+
+**Nav configuration shape** (drives `AppShell`, Phase 3 — data, not markup):
+
+```ts
+interface NavItem {
+  label: string;
+  icon: string;          // icon name (resolved by the host, like the theme registry)
+  to: string;            // route
+  badge?: number | string;
+  children?: NavItem[];  // at most one level deep
+}
+interface NavGroup {
+  label?: string;        // omitted → ungrouped (e.g. the top Dashboard item, or a flat menu)
+  items: NavItem[];
+}
+// AppShell receives `nav: NavGroup[]` plus a bottom/account section; it renders the grouping,
+// active state, collapse, and (if present) one level of expandable children.
+```
+
 **Top nav bar:** brand/logo or page/breadcrumb context on the left; global actions on the
 right (e.g. search, `ThemeToggle`/`ThemePicker`, notifications, user menu).
 
