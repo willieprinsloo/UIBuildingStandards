@@ -1,0 +1,88 @@
+/* src/components/auth/LoginScreen.css
+ * Standard split-screen auth layout. Generic tokens only (themeable by
+ * contract). Ratio defaults to the standard 4 : 1; override the two flex vars
+ * on .login-screen to change it. The form column stops shrinking at a usable
+ * min-width so it stays operable on very wide screens. */
+
+.login-screen {
+  /* Brand panel is a FIXED near-black surface in BOTH themes (spec): a calm,
+   * dark brand side, NOT an accent/purple fill and NOT theme-dependent. The
+   * accent appears only as a sparing detail (logo mark, link, thin rule).
+   * Override --login-brand-bg (a gradient value is fine) for a custom brand. */
+  --login-brand-bg: #0c0d11;
+  --login-brand-text: #e8eaed;
+  --login-brand-text-muted: rgba(232, 234, 237, 0.65);
+  --login-brand-flex: 4;
+  --login-form-flex: 1;
+
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg-base);
+  color: var(--text-primary);
+}
+
+/* Left — brand / description. Visually dominant, fixed near-black surface. */
+.login-screen__brand {
+  flex: var(--login-brand-flex) 1 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: var(--space-16) var(--space-12);
+  color: var(--login-brand-text);
+  background: var(--login-brand-bg);
+}
+
+.login-screen__brand-inner {
+  position: relative;
+  max-width: 34rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* Right — login form. Focused, vertically centered, on a surface panel. */
+.login-screen__form-panel {
+  flex: var(--login-form-flex) 1 0;
+  min-width: 22rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-10);
+  background: var(--bg-surface-1);
+  border-left: 1px solid var(--border-subtle);
+}
+
+.login-screen__aside {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+}
+
+.login-screen__form {
+  width: 100%;
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Responsive: stack; brand collapses to a slim header above the form. */
+@media (max-width: 52rem) {
+  .login-screen {
+    flex-direction: column;
+  }
+  .login-screen__brand {
+    flex: none;
+    padding: var(--space-8) var(--space-6);
+  }
+  .login-screen__form-panel {
+    flex: 1 1 auto;
+    min-width: 0;
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+    align-items: flex-start;
+  }
+}
