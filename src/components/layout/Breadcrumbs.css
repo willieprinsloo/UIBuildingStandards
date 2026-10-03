@@ -1,0 +1,41 @@
+/* src/components/layout/Breadcrumbs.css — hierarchical trail. Tokens only. */
+.ui-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: var(--type-label);
+}
+.ui-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.ui-breadcrumbs__link {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.ui-breadcrumbs__link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+.ui-breadcrumbs__link--button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+.ui-breadcrumbs__text {
+  color: var(--text-secondary);
+}
+.ui-breadcrumbs__current {
+  color: var(--text-primary);
+  font-weight: var(--type-label-weight);
+}
+.ui-breadcrumbs__sep {
+  color: var(--text-tertiary);
+}

@@ -95,8 +95,8 @@ Built in phases; each phase produces working, tested software.
 |-------|-------|--------|
 | 1 | Foundation — design tokens + theme engine (registry, `useTheme`, `ThemeToggle`, `ThemePicker`) + foundation docs | ✅ Complete |
 | 2 | Primitives — Button, Input, Select, Textarea, Checkbox, Radio, Switch, FormField, Badge | ✅ Complete |
-| 3 | Layout & shell — AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card | ⏳ Planned |
-| 4 | Data — DataTable (server-driven sorting + search + paging), Pagination, StatCard, EmptyState, Skeleton | ⏳ Planned |
+| 3 | Layout & shell — AppShell (sidebar + topnav), PageHeader, Tabs, Breadcrumbs, Card | ✅ Complete |
+| 4 | Data — StatCard ✅ · EmptyState ✅ · DataTable, Pagination, Skeleton ⏳ | 🔸 In progress |
 | 5 | Overlay — Modal, Drawer, Toast, DropdownMenu, Combobox, DatePicker, CommandPalette | ⏳ Planned |
 | 6 | Auth — LoginScreen (split-screen) ✅ · ChangePassword, ForgotPassword, ResetPassword ⏳ | 🔸 In progress |
 | 7 | Docs, gallery & `ui-standards` skill | ⏳ Planned |

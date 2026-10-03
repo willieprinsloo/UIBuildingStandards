@@ -1,0 +1,173 @@
+/* src/components/layout/AppShell.css — admin frame. Generic tokens only.
+ * Grid: top bar spans both columns; sidebar left, content right. */
+.ui-appshell {
+  --_sidebar: var(--sidebar-width-expanded);
+  display: grid;
+  grid-template-columns: var(--_sidebar) 1fr;
+  grid-template-rows: var(--topnav-height) 1fr;
+  grid-template-areas:
+    'topbar topbar'
+    'sidebar content';
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg-base);
+  color: var(--text-primary);
+}
+.ui-appshell--collapsed {
+  --_sidebar: var(--sidebar-width-collapsed);
+}
+
+/* Top bar */
+.ui-appshell__topbar {
+  grid-area: topbar;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  height: var(--topnav-height);
+  padding: 0 var(--space-5);
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--border);
+}
+.ui-appshell__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--type-body-emphasis-weight);
+}
+.ui-appshell__topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Sidebar */
+.ui-appshell__sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-base);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+.ui-appshell__nav-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3) var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.ui-appshell__nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.ui-appshell__nav-section-label {
+  padding: 0 var(--space-2);
+  font-size: var(--type-eyebrow-size);
+  font-weight: var(--type-eyebrow-weight);
+  letter-spacing: var(--type-eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.ui-appshell__nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--nav-item-height);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  border-left: 2px solid transparent;
+  background: none;
+  color: var(--text-secondary);
+  font: var(--type-label);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-default);
+}
+.ui-appshell__nav-item:hover {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+}
+.ui-appshell__nav-item--active {
+  border-left-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+.ui-appshell__nav-icon {
+  display: inline-flex;
+  flex: none;
+  width: 1.25rem;
+  justify-content: center;
+}
+.ui-appshell__nav-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui-appshell__nav-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.ui-appshell__collapse {
+  appearance: none;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-2);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  text-align: right;
+}
+.ui-appshell__collapse:hover {
+  color: var(--text-primary);
+}
+
+/* Content */
+.ui-appshell__content {
+  grid-area: content;
+  overflow-y: auto;
+  padding: var(--space-6);
+}
+
+/* Collapsed: hide labels + section labels, center items. */
+.ui-appshell--collapsed .ui-appshell__nav-label,
+.ui-appshell--collapsed .ui-appshell__nav-section-label {
+  display: none;
+}
+.ui-appshell--collapsed .ui-appshell__nav-item {
+  justify-content: center;
+  padding: 0;
+  gap: 0;
+}
+
+/* Auto-collapse under 1024px. */
+@media (max-width: 1024px) {
+  .ui-appshell {
+    --_sidebar: var(--sidebar-width-collapsed);
+  }
+  .ui-appshell__nav-label,
+  .ui-appshell__nav-section-label {
+    display: none;
+  }
+  .ui-appshell__nav-item {
+    justify-content: center;
+    padding: 0;
+    gap: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-appshell__nav-item {
+    transition: none;
+  }
+}

@@ -1,0 +1,38 @@
+/* src/components/layout/PageHeader.css — page title block. Tokens only. */
+.ui-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+.ui-page-header__breadcrumbs {
+  margin-bottom: var(--space-1);
+}
+.ui-page-header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.ui-page-header__title {
+  margin: 0;
+  font-size: var(--type-h1-size);
+  font-weight: var(--type-h1-weight);
+  letter-spacing: var(--type-h1-tracking);
+  color: var(--text-primary);
+}
+.ui-page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.ui-page-header__description {
+  margin: 0;
+  max-width: 48rem;
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+.ui-page-header__extra {
+  margin-top: var(--space-2);
+}
